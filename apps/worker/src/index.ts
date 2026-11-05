@@ -87,6 +87,7 @@ import {
   resolveOgForForm,
   resolveOgForAccount,
 } from './lib/og-resolver.js';
+import { edgeExt } from './routes/edge-ext.js';
 
 export type Env = {
   Bindings: {
@@ -285,6 +286,7 @@ app.route('/admin/update', adminUpdate);
 // Inert (404) unless ADMIN_SSO_SECRET is configured. authMiddleware skips
 // non-/api/ paths, so this route owns its own verification.
 app.route('/', adminSso);
+app.route('/', edgeExt);
 
 // Self-hosted QR code proxy — prevents leaking ref tokens to third-party services
 app.get('/api/qr', async (c) => {
